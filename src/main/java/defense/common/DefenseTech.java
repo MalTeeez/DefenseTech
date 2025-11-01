@@ -80,7 +80,7 @@ import defense.common.potion.PoisonFrostBite;
 import defense.common.potion.PoisonToxin;
 import defense.common.potion.PotionUtility;
 
-@Mod(modid = Reference.NAME, name = Reference.NAME, version = Reference.VERSION, guiFactory = "defense.client.gui.ConfigGuiFactory", dependencies = "required-after:Mekanism")
+@Mod(modid = Reference.NAME, name = Reference.NAME, version = Tags.VERSION, guiFactory = "defense.client.gui.ConfigGuiFactory", dependencies = "required-after:Mekanism")
 public final class DefenseTech
 {
     @Instance(Reference.NAME)
@@ -94,14 +94,14 @@ public final class DefenseTech
 
     public static final ContagiousPoison poisonous_potion = new ContagiousPoison("Chemical", 1, false);
     public static final ContagiousPoison contagios_potion = new ContagiousPoison("Contagious", 1, true);
-    
-    public static Version versionNumber = Version.get(Reference.VERSION);
-    
+
+    public static Version versionNumber = Version.get(Tags.VERSION);
+
 	public static String latestVersionNumber;
 	public static String recentNews;
 
     public static final Logger LOGGER = Logger.getLogger(Reference.NAME);
-    
+
     public static SimpleNetworkWrapper netHandler = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.CHANNEL);
 
     @EventHandler
@@ -111,14 +111,14 @@ public final class DefenseTech
         FMLCommonHandler.instance().bus().register(INSTANCE);
         MinecraftForge.EVENT_BUS.register(INSTANCE);
         MinecraftForge.EVENT_BUS.register(proxy);
-        
+
         Explosive.register();
 
         proxy.loadConfiguration();
-        
+
         DefenseTechItems.register();
         DefenseTechBlocks.register();
-        
+
         PotionUtility.resizePotionArray();
 
         /** Decrease Obsidian Resistance */
@@ -152,7 +152,7 @@ public final class DefenseTech
                 }
 
                 itemStack.stackSize--;
-               
+
                 return itemStack;
             }
         });
@@ -201,7 +201,7 @@ public final class DefenseTech
                 }
 
                 itemStack.stackSize--;
-                
+
                 return itemStack;
             }
         });
@@ -257,11 +257,8 @@ public final class DefenseTech
         EntityRegistry.registerModEntity(EntityLightBeam.class, Reference.ENTITY_PREFIX + "LightBeam", 5, this, 80, 5, true);
         EntityRegistry.registerModEntity(EntityGrenade.class, Reference.ENTITY_PREFIX + "Grenade", 6, this, 50, 5, true);
         EntityRegistry.registerModEntity(EntityBombCart.class, Reference.ENTITY_PREFIX + "BombCart", 7, this, 50, 4, true);
-        
+
         netHandler.registerMessage(PacketItem.class, ItemMessage.class, 0, Side.SERVER);
-        
-        //Get data from server
-      	new ThreadGetData();
 
         proxy.init();
     }
@@ -283,7 +280,7 @@ public final class DefenseTech
         // Antidote
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(DefenseTechItems.itemAntidote, 6), new Object[] { "@@@", "@@@", "@@@", '@', Items.pumpkin_seeds }));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(DefenseTechItems.itemAntidote), new Object[] { "@@@", "@@@", "@@@", '@', Items.wheat_seeds }));
-        
+
         /** Add all Recipes */
         // Rocket Launcher
         CraftingManager.getInstance().getRecipeList().add(new ShapedMekanismRecipe(((ItemEnergized)DefenseTechItems.itemRocketLauncher).getUnchargedItem(), new Object[] { "SCR", "SB ", 'R', ((ItemEnergized)DefenseTechItems.itemRadarGun).getUnchargedItem(), 'C', new ItemStack(DefenseTechBlocks.blockMachine, 1, MachineData.CruiseLauncher.ordinal()), 'B', Blocks.stone_button, 'S', "ingotSteel" }));
@@ -334,18 +331,18 @@ public final class DefenseTech
         {
             explosive.init();
             // Missile
-            
+
             if(explosive.hasBlockForm())
             {
             	CraftingManager.getInstance().getRecipeList().add(new ShapelessOreRecipe(new ItemStack(DefenseTechItems.itemMissile, 1, explosive.getID()), new Object[] { new ItemStack(DefenseTechItems.itemMissile, 1, Explosive.missileModule.getID()), new ItemStack(DefenseTechBlocks.blockExplosive, 1, explosive.getID()) }));
             }
-           
+
             if(explosive.getTier() < 2)
             {
                 // Grenade
             	CraftingManager.getInstance().getRecipeList().add(new ShapedMekanismRecipe(new ItemStack(DefenseTechItems.itemGrenade, 1, explosive.getID()), new Object[] { "?", "@", '@', new ItemStack(DefenseTechBlocks.blockExplosive, 1, explosive.getID()), '?', Items.string }));
             }
-            
+
             if(explosive.getTier() < 3)
             {
                 // Minecart
@@ -358,13 +355,13 @@ public final class DefenseTech
 	public void serverStarting(FMLServerStartingEvent evt)
 	{
     	FrequencyGrid.reinitiate();
-    	
+
     	// Setup command
         ICommandManager commandManager = FMLCommonHandler.instance().getMinecraftServerInstance().getCommandManager();
         ServerCommandManager serverCommandManager = ((ServerCommandManager) commandManager);
         serverCommandManager.registerCommand(new CommandHandler());
 	}
-    
+
     @SubscribeEvent
     public void enteringChunk(EnteringChunk evt)
     {
@@ -409,7 +406,7 @@ public final class DefenseTech
             }
         }
     }
-    
+
     @SubscribeEvent
 	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event)
 	{

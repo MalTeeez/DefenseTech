@@ -6,8 +6,6 @@ public class Reference
 {
     /** Name of the channel and mod ID. */
     public static final String NAME = "DefenseTech";
-    
-    public static final String VERSION = "1.0.1";
 
     public static final String CHANNEL = "DEF";
     public static final String ENTITY_PREFIX = CHANNEL;

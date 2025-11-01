@@ -15,7 +15,7 @@ import defense.common.entity.EntityMissile;
 import defense.common.explosive.blast.BlastRepulsive;
 
 /** Anti-Ballistic missile.
- * 
+ *
  * @author Calclavia */
 public class MissileAntiBallistic extends Missile
 {
@@ -25,7 +25,7 @@ public class MissileAntiBallistic extends Missile
     {
         super("antiBallistic", 2);
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
     public ModelMissileBase getMissileModel()
@@ -63,7 +63,7 @@ public class MissileAntiBallistic extends Missile
 
         AxisAlignedBB bounds = AxisAlignedBB.getBoundingBox(missileObj.posX - ABMRange, missileObj.posY - ABMRange, missileObj.posZ - ABMRange, missileObj.posX + ABMRange, missileObj.posY + ABMRange, missileObj.posZ + ABMRange);
         // TODO: Check if this works.
-        Entity nearestEntity = missileObj.worldObj.findNearestEntityWithinAABB(ITarget.class, bounds, missileObj);
+        Entity nearestEntity = missileObj.worldObj.findNearestEntityWithinAABB(EntityMissile.class, bounds, missileObj);
 
         if(nearestEntity instanceof ITarget && ((ITarget) nearestEntity).getType() == TargetType.MISSILE)
         {
