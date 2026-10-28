@@ -6,9 +6,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.Loader;
 import defense.common.DefenseTech;
 import defense.common.DefenseUtils;
 import defense.common.Reference;
+import defense.common.compat.U25CoreRadiation;
 import defense.common.explosive.thread.ThreadLargeExplosion;
 
 public class BlastNuclear extends Blast
@@ -160,6 +162,11 @@ public class BlastNuclear extends Blast
         {
             new BlastRot(worldObj, exploder, position.xPos, position.yPos, position.zPos, getRadius(), explosionEnergy).explode();
             new BlastMutation(worldObj, exploder, position.xPos, position.yPos, position.zPos, getRadius()).explode();
+
+            if(Loader.isModLoaded("u25core"))
+            {
+            	U25CoreRadiation.fallout(worldObj, position.xPos, position.yPos, position.zPos, getRadius());
+            }
 
             if(worldObj.rand.nextInt(3) == 0)
             {

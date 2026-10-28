@@ -27,6 +27,7 @@ public class Settings
     public static boolean POLLUTIVE_NUCLEAR = true;
     public static boolean CREATE_NETHERRACK = true;
     public static double REDUCE_OBSIDIAN_RESISTANCE = 45F;
+    public static double NUCLEAR_FALLOUT = 100;
 
     public static void initiate()
     {
@@ -44,5 +45,6 @@ public class Settings
         POLLUTIVE_NUCLEAR = Settings.CONFIGURATION.get(Configuration.CATEGORY_GENERAL, "Pollutive Nuclear", true).getBoolean(true);
         CREATE_NETHERRACK = Settings.CONFIGURATION.get(Configuration.CATEGORY_GENERAL, "Exothermic Create Netherrack", true).getBoolean(true);
         REDUCE_OBSIDIAN_RESISTANCE = Settings.CONFIGURATION.get(Configuration.CATEGORY_GENERAL, "Reduce Obsidian Resistance", 45F).getDouble(45F);
+        NUCLEAR_FALLOUT = Settings.CONFIGURATION.get(Configuration.CATEGORY_GENERAL, "Nuclear Fallout", 100D, "Radiation in Sv/h a nuke leaves at ground zero with U25Core installed, falling off to the edge of the blast").getDouble(100D);
     }
 }

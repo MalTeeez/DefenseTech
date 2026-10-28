@@ -41,4 +41,5 @@ dependencies {
     devOnlyNonPublishable("net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev") { transitive = false }
 
     devOnlyNonPublishable(rfg.deobf(files("libs/Mekanism-Community-Edition-1.7.10-9.10.42.jar")))
+    compileOnly(group: 'MalTeeez', name: 'u25core', version: '1.5', classifier: 'api')
 }
